@@ -1,3 +1,4 @@
+require('dotenv').config(); // Access environment variables
 const express = require('express'); // Import express library to create a server
 const bodyParser = require('body-parser'); // Import body-parser to extract request body
 const mongoose = require('mongoose'); // Import mongoose to connect to MongoDB cluster
@@ -7,7 +8,7 @@ const Thing = require('./models/thing'); // Import model from data schema to per
 const app = express();
 
 // Connect to MongoDB cluster
-mongoose.connect('mongodb+srv://elvisasante5:psnahBmwOj0I7xEp@cluster0.yx17j3o.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect(process.env.MONGODB_URI)
     .then( () => {
         console.log('Successfully connected to MongoDB cluster !');
     })
@@ -47,7 +48,10 @@ app.post('/api/stuff',(req, res, next) => {
 app.get('/api/stuff',(req, res, next) => {
 
     Thing.find()
-        .then( (things) => { res.status(200).json({ message: things}) } )
+        .then( (things) =>
+        {
+            res.status(200).json(things);
+        } )
         .catch( (error) => { res.status(400).json({ error: error }) } )
 });
 
