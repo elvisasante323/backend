@@ -59,7 +59,7 @@ exports.deleteThing = (req, res, next) => {
             }
         })
         .catch( (error) => { res.status(400).json({ error: error }); } );
-       
+
 
     // Actual deletion
     Thing.deleteOne({ _id: req.params.id} )
