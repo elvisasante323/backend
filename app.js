@@ -76,7 +76,7 @@ app.put('/api/stuff/:id',(req, res, next) => {
         userId: req.body.userId
     });
 
-    thing.updateOne( { _id: req.params.id }, thing )
+    Thing.updateOne( { _id: req.params.id }, thing )
         .then( () => { res.status(201).json({ message: 'Item updated successfully!'}); })
         .catch( (error) => { res.status(400).json({ error: error }); })
 });
