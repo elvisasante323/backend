@@ -2,7 +2,8 @@ require('dotenv').config(); // Access environment variables
 const express = require('express'); // Import express library to create a server
 const bodyParser = require('body-parser'); // Import body-parser to extract request body
 const mongoose = require('mongoose'); // Import mongoose to connect to MongoDB cluster
-const stuffRoutes = require("./routes/stuff"); // Import routes
+const stuffRoutes = require("./routes/stuff"); // Import stuff routes
+const userRoutes = require("./routes/user"); // Import user routes
 
 
 // Run express
@@ -31,6 +32,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/api/stuff', stuffRoutes);
+app.use('/api/auth', userRoutes);
 
 // Export const app to make it accessible somewhere else
 module.exports = app;
