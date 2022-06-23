@@ -4,7 +4,7 @@ const bodyParser = require('body-parser'); // Import body-parser to extract requ
 const mongoose = require('mongoose'); // Import mongoose to connect to MongoDB cluster
 const stuffRoutes = require("./routes/stuff"); // Import stuff routes
 const userRoutes = require("./routes/user"); // Import user routes
-
+const path = require("path"); // Used for uploading images
 
 // Run express
 const app = express();
@@ -27,8 +27,8 @@ app.use((req, res, next) => {
     next();
 });
 
-// Extract JSON body from request
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // Extract JSON body from request
+app.use("/images", express.static(path.join(__dirname, "images"))); // Path for uploading images
 
 // Routes
 app.use('/api/stuff', stuffRoutes);
